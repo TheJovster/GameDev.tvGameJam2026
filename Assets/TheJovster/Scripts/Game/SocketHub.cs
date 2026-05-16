@@ -3,43 +3,68 @@ using UnityEngine.Events;
 
 public class SocketHub : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Transform _plugPoint;
-    [SerializeField] private string _promptWhenEmpty = "Plug In";
-    [SerializeField] private bool _isOccupied = false;
+    [Header("Plug Settings")]
+    [SerializeField] private PlugColor _plugColor = PlugColor.Red;
+    [SerializeField] private Renderer _colorRenderer;
 
-    public UnityEvent<GameObject> OnObjectPlugged;
+    [Header("Connection")]
+    [SerializeField] private Transform _cableAnchor;
+    [SerializeField] private bool _isConnected = false;
 
-    public string InteractionPrompt => _isOccupied ? "" : _promptWhenEmpty;
+    public UnityEvent OnTethered;
+
+    public PlugColor PlugColor => _plugColor;
+    public bool IsConnected => _isConnected;
+    public Transform CableAnchor => _cableAnchor != null ? _cableAnchor : transform;
+
+    public string InteractionPrompt => _isConnected ? "" : "Grab Cable";
+
+    private void Start()
+    {
+        ApplyColor();
+    }
 
     public bool CanInteract(GameObject interactor)
     {
-        if (_isOccupied) return false;
+        if (_isConnected) return false;
 
         PlayerInteraction interaction = interactor.GetComponent<PlayerInteraction>();
-        return interaction != null && interaction.IsHolding;
+        return interaction != null && !interaction.IsTethered;
     }
 
     public void Interact(GameObject interactor)
     {
-        // Actual plug-in is handled by PlayerInteraction.PlugIn()
-        // This exists to satisfy the interface
+        // PlayerInteraction handles the actual tether setup
     }
 
-    public Transform GetPlugPoint()
+    public void SetTethered(bool tethered)
     {
-        return _plugPoint != null ? _plugPoint : transform;
+        _isConnected = tethered;
+        if (tethered)
+            OnTethered?.Invoke();
     }
 
-    public void OnPlugged(GameObject pluggedObject)
+    private void ApplyColor()
     {
-        _isOccupied = true;
-        OnObjectPlugged?.Invoke(pluggedObject);
+        if (_colorRenderer != null)
+            PlugColorHelper.ApplyColor(_plugColor, _colorRenderer);
+    }
+
+    private void OnValidate()
+    {
+        ApplyColor();
     }
 
     private void OnDrawGizmos()
     {
-        Transform point = _plugPoint != null ? _plugPoint : transform;
-        Gizmos.color = _isOccupied ? Color.red : Color.green;
-        Gizmos.DrawWireCube(point.position, Vector3.one * 0.3f);
+        Gizmos.color = PlugColorHelper.ToColor(_plugColor);
+        Vector3 anchor = _cableAnchor != null ? _cableAnchor.position : transform.position;
+        Gizmos.DrawWireSphere(anchor, 0.25f);
+
+        if (_isConnected)
+        {
+            Gizmos.color = Color.gray;
+            Gizmos.DrawWireCube(anchor, Vector3.one * 0.15f);
+        }
     }
 }

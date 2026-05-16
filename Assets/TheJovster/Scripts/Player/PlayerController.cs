@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,9 +26,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference _jumpAction;
     [SerializeField] private InputActionReference _sprintAction;
 
+    [Header("Components")]
+    [SerializeField] private Knockbackable _knockbackable = null;
+
     private void Awake()
     {
         _cc = GetComponent<CharacterController>();
+        if(_knockbackable == null)
+        {
+            _knockbackable = GetComponent<Knockbackable>();
+        }
     }
 
     private void Start()
@@ -107,6 +115,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (_knockbackable.IsKnockedBack) return;
+
         Vector3 camForward = _cameraTransform.forward;
         Vector3 camRight = _cameraTransform.right;
         camForward.y = 0f;

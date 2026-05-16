@@ -4,58 +4,53 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Socket Hubs (assign manually)")]
-    [SerializeField] private SocketHub[] _socketHubs;
+    [Header("Level")]
+    [SerializeField] private CentralBattery _battery;
 
     [Header("Events")]
-    public UnityEvent OnAllPlugged;
+    public UnityEvent OnVictory;
 
-    private int _pluggedCount;
     private bool _isComplete;
 
     private void Start()
     {
-        _pluggedCount = 0;
         _isComplete = false;
 
-        for (int i = 0; i < _socketHubs.Length; i++)
+        if (_battery != null)
         {
-            _socketHubs[i].OnObjectPlugged.AddListener(HandlePlugged);
+            _battery.OnAllRequiredFilled.AddListener(HandleVictory);
         }
     }
 
-    private void HandlePlugged(GameObject obj)
+    private void HandleVictory()
     {
-        _pluggedCount++;
+        if (_isComplete) return;
+        _isComplete = true;
 
-        if (!_isComplete && _pluggedCount >= _socketHubs.Length)
-        {
-            _isComplete = true;
-            Victory();
-        }
-    }
-
-    private void Victory()
-    {
-        Debug.Log("ALL HUBS FILLED — VICTORY");
-        OnAllPlugged?.Invoke();
+        Debug.Log("ALL REQUIRED SLOTS FILLED — VICTORY");
+        OnVictory?.Invoke();
+        Time.timeScale = 0; //pause the game
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public float GetProgress()
     {
-        if (_socketHubs.Length == 0) return 1f;
-        return (float)_pluggedCount / _socketHubs.Length;
+        if (_battery == null) return 0f;
+        int total = _battery.GetRequiredCount();
+        if (total == 0) return 1f;
+        return (float)_battery.GetRequiredFilledCount() / total;
     }
 
-    public int GetPluggedCount() => _pluggedCount;
-    public int GetTotalCount() => _socketHubs.Length;
-    public bool IsComplete() => _isComplete;
-
-    public void RestartLevel() 
+    public void RestartLevel()
     {
+        Time.timeScale = 1f; //unpause the game
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1; // Reset time scale in case we were paused on victory.
-        SceneManager.LoadSceneAsync(0); //NOTE: This assumes the current level is at index 0 in the build settings. Adjust as necessary.Will need a more robust scene management solution later.
+        SceneManager.LoadSceneAsync(0); // Assuming the main level is at index 0 - need a more robust scene management strategy for later
     }
+
+    public int GetFilledCount() => _battery != null ? _battery.GetRequiredFilledCount() : 0;
+    public int GetRequiredCount() => _battery != null ? _battery.GetRequiredCount() : 0;
+    public bool IsComplete() => _isComplete;
 }

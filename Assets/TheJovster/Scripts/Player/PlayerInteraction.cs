@@ -7,19 +7,24 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float _interactRange = 3f;
     [SerializeField] private float _rayRadius = 0.3f;
     [SerializeField] private LayerMask _interactLayer = ~0;
-    [SerializeField] private Transform _rayOrigin; 
+    [SerializeField] private Transform _rayOrigin;
 
-    [Header("Carry Socket")]
-    [SerializeField] private Transform _carrySocket;
+    [Header("Tether")]
+    [SerializeField] private Transform _cableAttachPoint;
+    [SerializeField] private CableLine _cableLine;
+    [SerializeField] private CableLine _permanentCablePrefab;
 
     [Header("Input")]
     [SerializeField] private InputActionReference _interactAction;
+    [SerializeField] private InputActionReference _disconnectAction;
 
-    private GameObject _heldObject;
+    private SocketHub _tetheredDevice;
     private IInteractable _currentTarget;
 
-    public bool IsHolding => _heldObject != null;
-    public GameObject HeldObject => _heldObject;
+    public bool IsTethered => _tetheredDevice != null;
+    public PlugColor TetheredColor => _tetheredDevice != null ? _tetheredDevice.PlugColor : PlugColor.White;
+    public SocketHub TetheredDevice => _tetheredDevice;
+    public Transform CableAttachPoint => _cableAttachPoint != null ? _cableAttachPoint : transform;
 
     private void OnEnable()
     {
@@ -28,14 +33,21 @@ public class PlayerInteraction : MonoBehaviour
             _interactAction.action.Enable();
             _interactAction.action.performed += OnInteract;
         }
+
+        if (_disconnectAction != null)
+        {
+            _disconnectAction.action.Enable();
+            _disconnectAction.action.performed += OnDisconnect;
+        }
     }
 
     private void OnDisable()
     {
         if (_interactAction != null)
-        {
             _interactAction.action.performed -= OnInteract;
-        }
+
+        if (_disconnectAction != null)
+            _disconnectAction.action.performed -= OnDisconnect;
     }
 
     private void Update()
@@ -52,9 +64,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
             if (interactable != null && interactable.CanInteract(gameObject))
-            {
                 return interactable;
-            }
         }
 
         return null;
@@ -64,113 +74,100 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (_currentTarget == null) return;
 
-        if (IsHolding)
+        if (IsTethered)
         {
-            SocketHub socket = GetSocketHubFromTarget(_currentTarget);
-            if (socket != null)
+            CentralBattery battery = GetComponentFromTarget<CentralBattery>(_currentTarget);
+            if (battery != null)
             {
-                PlugIn(socket);
+                ConnectToBattery(battery);
                 return;
             }
         }
 
-        if (!IsHolding)
+        if (!IsTethered)
         {
-            _currentTarget.Interact(gameObject);
-            PickUp((_currentTarget as MonoBehaviour)?.gameObject);
+            SocketHub device = GetComponentFromTarget<SocketHub>(_currentTarget);
+            if (device != null)
+            {
+                TetherTo(device);
+                return;
+            }
         }
     }
 
-    private void PickUp(GameObject obj)
+    private void OnDisconnect(InputAction.CallbackContext ctx)
     {
-        if (obj == null) return;
-
-        _heldObject = obj;
-
-        _heldObject.transform.SetParent(_carrySocket);
-        _heldObject.transform.localPosition = Vector3.zero;
-        _heldObject.transform.localRotation = Quaternion.identity;
-
-        Rigidbody rb = _heldObject.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-        }
-
-        Collider col = _heldObject.GetComponent<Collider>();
-        if (col != null)
-        {
-            col.enabled = false;
-        }
+        Disconnect();
     }
 
-    public void PlugIn(SocketHub socket)
+    private void TetherTo(SocketHub device)
     {
-        if (_heldObject == null || socket == null) return;
+        _tetheredDevice = device;
+        _tetheredDevice.SetTethered(true);
 
-        Transform plugPoint = socket.GetPlugPoint();
-
-        _heldObject.transform.SetParent(plugPoint);
-        _heldObject.transform.localPosition = Vector3.zero;
-        _heldObject.transform.localRotation = Quaternion.identity;
-
-        Collider col = _heldObject.GetComponent<Collider>();
-        if (col != null)
-        {
-            col.enabled = true;
-        }
-
-        socket.OnPlugged(_heldObject);
-
-        _heldObject = null;
+        if (_cableLine != null)
+            _cableLine.Activate(device.CableAnchor, CableAttachPoint, device.PlugColor);
     }
 
-    public void Drop()
+    private void ConnectToBattery(CentralBattery battery)
     {
-        if (_heldObject == null) return;
+        if (_tetheredDevice == null) return;
 
-        _heldObject.transform.SetParent(null);
+        Transform snapPoint = battery.ConnectPlug(_tetheredDevice.PlugColor);
+        if (snapPoint == null) return;
 
-        Rigidbody rb = _heldObject.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (_cableLine != null)
+            _cableLine.Deactivate();
+
+        if (_permanentCablePrefab != null)
         {
-            rb.isKinematic = false;
+            CableLine permanent = Instantiate(_permanentCablePrefab);
+            permanent.Activate(_tetheredDevice.CableAnchor, snapPoint, _tetheredDevice.PlugColor);
         }
 
-        Collider col = _heldObject.GetComponent<Collider>();
-        if (col != null)
-        {
-            col.enabled = true;
-        }
-
-        _heldObject = null;
+        _tetheredDevice = null;
     }
 
-    private SocketHub GetSocketHubFromTarget(IInteractable target)
+    public void Disconnect()
+    {
+        if (_tetheredDevice == null) return;
+
+        _tetheredDevice.SetTethered(false);
+        _tetheredDevice = null;
+
+        if (_cableLine != null)
+            _cableLine.Deactivate();
+    }
+
+    private T GetComponentFromTarget<T>(IInteractable target) where T : Component
     {
         MonoBehaviour mb = target as MonoBehaviour;
         if (mb == null) return null;
-        return mb.GetComponentInParent<SocketHub>();
+        return mb.GetComponentInParent<T>();
+    }
+
+    public string GetCurrentPrompt()
+    {
+        if (_currentTarget == null)
+        {
+            if (IsTethered) return "Press [Q] to Disconnect";
+            return null;
+        }
+
+        if (IsTethered && GetComponentFromTarget<CentralBattery>(_currentTarget) != null)
+            return "Connect to Battery";
+
+        if (!IsTethered)
+            return _currentTarget.InteractionPrompt;
+
+        return null;
     }
 
     private void OnDrawGizmosSelected()
     {
         Transform origin = _rayOrigin != null ? _rayOrigin : transform;
-        Gizmos.color = IsHolding ? Color.green : Color.red;
+        Gizmos.color = IsTethered ? Color.green : Color.red;
         Gizmos.DrawRay(origin.position, origin.forward * _interactRange);
         Gizmos.DrawWireSphere(origin.position + origin.forward * _interactRange, _rayRadius);
-    }
-
-    public string GetCurrentPrompt()
-    {
-        if (_currentTarget == null) return null;
-
-        if (IsHolding && GetSocketHubFromTarget(_currentTarget) != null)
-            return "Plug In";
-
-        if (!IsHolding)
-            return _currentTarget.InteractionPrompt;
-
-        return null;
     }
 }

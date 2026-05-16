@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
@@ -14,7 +13,6 @@ public class GameUI : MonoBehaviour
 
     [Header("Victory Panel")]
     [SerializeField] private GameObject _victoryPanel;
-    [SerializeField] private Button _restartButton;
 
     private void Start()
     {
@@ -22,7 +20,7 @@ public class GameUI : MonoBehaviour
             _victoryPanel.SetActive(false);
 
         if (_gameManager != null)
-            _gameManager.OnAllPlugged.AddListener(ShowVictory);
+            _gameManager.OnVictory.AddListener(ShowVictory);
     }
 
     private void Update()
@@ -34,7 +32,7 @@ public class GameUI : MonoBehaviour
     private void UpdateProgress()
     {
         if (_progressText == null || _gameManager == null) return;
-        _progressText.text = $"{_gameManager.GetPluggedCount()} / {_gameManager.GetTotalCount()}";
+        _progressText.text = $"{_gameManager.GetFilledCount()} / {_gameManager.GetRequiredCount()}";
     }
 
     private void UpdateInteractPrompt()
@@ -49,16 +47,13 @@ public class GameUI : MonoBehaviour
         else
         {
             _interactPromptText.enabled = true;
-            _interactPromptText.text = $"[F] {prompt}";
+            _interactPromptText.text = prompt;
         }
     }
 
     private void ShowVictory()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         if (_victoryPanel != null)
             _victoryPanel.SetActive(true);
-        Time.timeScale = 0f;
     }
 }

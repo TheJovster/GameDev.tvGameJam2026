@@ -11,9 +11,13 @@ GameObject:
   - component: {fileID: 7552438326439923243}
   - component: {fileID: 2086109795869342514}
   - component: {fileID: 8376426390837166353}
-  m_Layer: 0
+  - component: {fileID: 1354633172094637500}
+  - component: {fileID: 5772539633803391252}
+  - component: {fileID: 176160611625891939}
+  - component: {fileID: 2755245466533880485}
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,6 +37,7 @@ Transform:
   m_Children:
   - {fileID: 2154104143938318799}
   - {fileID: 690494138455504636}
+  - {fileID: 4608636814269031250}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &2086109795869342514
@@ -81,6 +86,77 @@ MonoBehaviour:
   _moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _sprintAction: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  _knockbackable: {fileID: 176160611625891939}
+--- !u!114 &1354633172094637500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347122887102152093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8514ab8cbbe4d2a4288d233ce55df838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  _interactRange: 3
+  _rayRadius: 0.3
+  _interactLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _rayOrigin: {fileID: 0}
+  _cableAttachPoint: {fileID: 4608636814269031250}
+  _cableLine: {fileID: 0}
+  _permanentCablePrefab: {fileID: 0}
+  _interactAction: {fileID: -5467829963475506011, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  _disconnectAction: {fileID: -8653874077298127104, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!114 &5772539633803391252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347122887102152093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca87efbeb230794b96eba97a88812e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  _currentHealth: 0
+  _maxHealth: 5
+  _canTakeDamage: 1
+  _knockbackable: {fileID: 176160611625891939}
+  _flashComponent: {fileID: 2755245466533880485}
+  _playerInteraction: {fileID: 0}
+--- !u!114 &176160611625891939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347122887102152093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef2cf54fb799b0458bc1099d333692e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Knockbackable
+  _knockbackForce: 15
+  _knockbackDuration: 0.2
+--- !u!114 &2755245466533880485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347122887102152093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a820bf169be700f4f8f107d7e8d556ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashComponent
+  modelToFlash: {fileID: 4499105354407970685}
+  flashDuration: 2
+  flashInterval: 0.1
 --- !u!1 &585024744219045629
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 690494138455504636}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BoomPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +200,7 @@ GameObject:
   - component: {fileID: 9190464495360089112}
   - component: {fileID: 1574806751312033568}
   - component: {fileID: 3372375711149784010}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Visor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +314,7 @@ GameObject:
   - component: {fileID: 7687109036240194231}
   - component: {fileID: 308199409162667380}
   - component: {fileID: 6148449197980146327}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,3 +417,34 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7599173189675147757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4608636814269031250}
+  m_Layer: 3
+  m_Name: Socket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4608636814269031250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599173189675147757}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7552438326439923243}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
