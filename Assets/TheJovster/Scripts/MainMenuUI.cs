@@ -7,6 +7,11 @@ public class MainMenuUI : MonoBehaviour
         ServiceRegistry.Instance?.Get<SceneLoader>()?.LoadScene("Gym");
     }
 
+    public void Tutorial() 
+    {
+        ServiceRegistry.Instance?.Get<SceneLoader>()?.LoadScene("TutorialLevel");
+    }
+
     public void Options() 
     {
         //options menu is not implemented yet, so just log for now
