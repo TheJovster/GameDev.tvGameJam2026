@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _victoryMusic;
 
     [Header("SFX")]
+    [SerializeField] private AudioClip[] _footsteps;
     [SerializeField] private AudioClip _sfxTether;
     [SerializeField] private AudioClip _sfxDisconnect;
     [SerializeField] private AudioClip _sfxPlugIn;
@@ -70,6 +71,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         if (clip == null) return;
+        _sfxSource.pitch = Random.Range(0.95f, 1.05f);
         _sfxSource.PlayOneShot(clip, _sfxVolume * _masterVolume);
     }
 
@@ -87,6 +89,7 @@ public class AudioManager : MonoBehaviour
         _musicSource.Stop();
     }
 
+    public void PlayFootstep() => PlaySFX(_footsteps[Random.Range(0, _footsteps.Length)]);
     public void PlayTether() => PlaySFX(_sfxTether);
     public void PlayDisconnect() => PlaySFX(_sfxDisconnect);
     public void PlayPlugIn() => PlaySFX(_sfxPlugIn);
