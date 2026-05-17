@@ -11,8 +11,7 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("Tether")]
     [SerializeField] private Transform _cableAttachPoint;
-    [SerializeField] private CableLine _cableLine;
-    [SerializeField] private CableLine _permanentCablePrefab;
+    [SerializeField] private CableTrail _cableTrail;
 
     [Header("Input")]
     [SerializeField] private InputActionReference _interactAction;
@@ -76,6 +75,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (IsTethered)
         {
+            // Try to plug into the battery
             CentralBattery battery = GetComponentFromTarget<CentralBattery>(_currentTarget);
             if (battery != null)
             {
@@ -86,6 +86,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (!IsTethered)
         {
+            // Try to tether to a device
             SocketHub device = GetComponentFromTarget<SocketHub>(_currentTarget);
             if (device != null)
             {
@@ -105,8 +106,8 @@ public class PlayerInteraction : MonoBehaviour
         _tetheredDevice = device;
         _tetheredDevice.SetTethered(true);
 
-        if (_cableLine != null)
-            _cableLine.Activate(device.CableAnchor, CableAttachPoint, device.PlugColor);
+        if (_cableTrail != null)
+            _cableTrail.Activate(device.CableAnchor, CableAttachPoint, device.PlugColor);
     }
 
     private void ConnectToBattery(CentralBattery battery)
@@ -116,14 +117,8 @@ public class PlayerInteraction : MonoBehaviour
         Transform snapPoint = battery.ConnectPlug(_tetheredDevice.PlugColor);
         if (snapPoint == null) return;
 
-        if (_cableLine != null)
-            _cableLine.Deactivate();
-
-        if (_permanentCablePrefab != null)
-        {
-            CableLine permanent = Instantiate(_permanentCablePrefab);
-            permanent.Activate(_tetheredDevice.CableAnchor, snapPoint, _tetheredDevice.PlugColor);
-        }
+        if (_cableTrail != null)
+            _cableTrail.Finalize(snapPoint);
 
         _tetheredDevice = null;
     }
@@ -135,8 +130,8 @@ public class PlayerInteraction : MonoBehaviour
         _tetheredDevice.SetTethered(false);
         _tetheredDevice = null;
 
-        if (_cableLine != null)
-            _cableLine.Deactivate();
+        if (_cableTrail != null)
+            _cableTrail.Deactivate();
     }
 
     private T GetComponentFromTarget<T>(IInteractable target) where T : Component

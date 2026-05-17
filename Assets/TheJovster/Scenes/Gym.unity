@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 52049097}
   - component: {fileID: 52049096}
   - component: {fileID: 52049095}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 273412964}
   - component: {fileID: 273412963}
   - component: {fileID: 273412962}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 555604800}
   - component: {fileID: 555604799}
   - component: {fileID: 555604798}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -901,7 +901,7 @@ GameObject:
   - component: {fileID: 590392283}
   - component: {fileID: 590392282}
   - component: {fileID: 590392281}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1672,7 +1672,7 @@ GameObject:
   - component: {fileID: 875519591}
   - component: {fileID: 875519590}
   - component: {fileID: 875519589}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1932,7 +1932,7 @@ GameObject:
   - component: {fileID: 1123684644}
   - component: {fileID: 1123684643}
   - component: {fileID: 1123684642}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2196,7 +2196,7 @@ GameObject:
   - component: {fileID: 1283788490}
   - component: {fileID: 1283788489}
   - component: {fileID: 1283788488}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2398,7 +2398,7 @@ GameObject:
   - component: {fileID: 1390354472}
   - component: {fileID: 1390354471}
   - component: {fileID: 1390354470}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2775,7 +2775,7 @@ GameObject:
   - component: {fileID: 2041077406}
   - component: {fileID: 2041077405}
   - component: {fileID: 2041077404}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3037,9 +3037,17 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 605834133}
+    - target: {fileID: 1965957567793693091, guid: c0d49c6047322264688543c455c7b614, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2070496806271357528, guid: c0d49c6047322264688543c455c7b614, type: 3}
       propertyPath: m_Name
       value: Console (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301103264920788265, guid: c0d49c6047322264688543c455c7b614, type: 3}
+      propertyPath: _groundMask.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 8060924433817232380, guid: c0d49c6047322264688543c455c7b614, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3086,6 +3094,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0d49c6047322264688543c455c7b614, type: 3}
+--- !u!114 &3200570569743147088 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4301103264920788265, guid: c0d49c6047322264688543c455c7b614, type: 3}
+  m_PrefabInstance: {fileID: 3200570569743147087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91f01eacac8df14d98a7126df8682cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CableTrail
 --- !u!1001 &4257699718933003555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3306,6 +3325,10 @@ PrefabInstance:
       propertyPath: _cableLine
       value: 
       objectReference: {fileID: 1251253515}
+    - target: {fileID: 1354633172094637500, guid: dc0de91571cf1c64eb198ae1e7ebe9b2, type: 3}
+      propertyPath: _cableTrail
+      value: 
+      objectReference: {fileID: 3200570569743147088}
     - target: {fileID: 1354633172094637500, guid: dc0de91571cf1c64eb198ae1e7ebe9b2, type: 3}
       propertyPath: _permanentCablePrefab
       value: 

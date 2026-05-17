@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1965957567793693091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9115006893282598799}
+  - component: {fileID: 4301103264920788265}
+  m_Layer: 6
+  m_Name: CableTrail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9115006893282598799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965957567793693091}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8060924433817232380}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4301103264920788265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965957567793693091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91f01eacac8df14d98a7126df8682cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CableTrail
+  _dropDistance: 3
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _groundRayHeight: 5
+  _groundOffset: 0.05
+  _segmentPrefab: {fileID: 8406214216654101665}
 --- !u!1 &2070496806271357528
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,6 +87,7 @@ Transform:
   - {fileID: 152681644431988515}
   - {fileID: 7950804269323374089}
   - {fileID: 555509468972882196}
+  - {fileID: 9115006893282598799}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2127455097187503257
@@ -290,3 +342,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6048497269818521771, guid: 958c54c04cfac4b499ea299493b70fcc, type: 3}
   m_PrefabInstance: {fileID: 4442372652092241570}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8406214216654101665 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5264326610732952067, guid: 958c54c04cfac4b499ea299493b70fcc, type: 3}
+  m_PrefabInstance: {fileID: 4442372652092241570}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3935d3750b1958c4dab995d76525f749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CableLine
