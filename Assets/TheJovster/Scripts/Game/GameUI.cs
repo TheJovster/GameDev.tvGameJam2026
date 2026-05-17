@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class GameUI : MonoBehaviour
 {
@@ -16,9 +17,32 @@ public class GameUI : MonoBehaviour
     [Header("Victory Panel")]
     [SerializeField] private GameObject _victoryPanel;
 
+    [Header("Pause Game Panel")]
+    [SerializeField] private GameObject _pausePanel;
+
     [Header("Buttons")]
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _quitButton;
+
+    [Header("Input")]
+    [SerializeField] private InputActionReference _pauseKey;
+
+    private void OnEnable()
+    {
+        if (_pauseKey != null)
+            _pauseKey.action.performed += OnPauseKeyPressed;
+    }
+
+    private void OnDisable()
+    {
+        if (_pauseKey != null)
+            _pauseKey.action.performed -= OnPauseKeyPressed;
+    }
+
+    private void Awake()
+    {
+        _gameManager = ServiceRegistry.Instance.Get<GameManager>();
+    }
 
     private void Start()
     {
@@ -69,14 +93,26 @@ public class GameUI : MonoBehaviour
             _victoryPanel.SetActive(true);
     }
 
-    private void PauseGame() 
+    private void OnPauseKeyPressed(InputAction.CallbackContext context)
     {
+        if (_gameManager == null) return;
 
+        if (_gameManager.IsPaused)
+            UnpauseGame();
+        else
+            PauseGame();
     }
 
-    private void UnpauseGame() 
+    private void PauseGame()
     {
+        _pausePanel.SetActive(true);
+        _gameManager.PauseGame();
+    }
 
+    private void UnpauseGame()
+    {
+        _pausePanel.SetActive(false);
+        _gameManager.UnpauseGame();
     }
 
     private void QuitToMainMenu() 
