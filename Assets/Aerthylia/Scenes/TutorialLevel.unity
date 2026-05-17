@@ -4701,7 +4701,7 @@ GameObject:
   - component: {fileID: 422250294}
   - component: {fileID: 422250293}
   - component: {fileID: 422250292}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PB_LevelLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47361,7 +47361,7 @@ GameObject:
   - component: {fileID: 895326326}
   - component: {fileID: 895326325}
   - component: {fileID: 895326324}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PB_LevelLayout (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
