@@ -2956,6 +2956,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2178269540939089232, guid: 25cc4f25f199bb14388f79af4a45107f, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2632813081736231392, guid: 25cc4f25f199bb14388f79af4a45107f, type: 3}
+      propertyPath: _endWidth
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2632813081736231392, guid: 25cc4f25f199bb14388f79af4a45107f, type: 3}
+      propertyPath: _startWidth
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6294632823366172468, guid: 25cc4f25f199bb14388f79af4a45107f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2999,6 +3011,22 @@ PrefabInstance:
     - target: {fileID: 6577107755038727184, guid: 25cc4f25f199bb14388f79af4a45107f, type: 3}
       propertyPath: m_Name
       value: Cable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945608706716639335, guid: 25cc4f25f199bb14388f79af4a45107f, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7369958194294985981, guid: 25cc4f25f199bb14388f79af4a45107f, type: 3}
+      propertyPath: _endWidth
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7369958194294985981, guid: 25cc4f25f199bb14388f79af4a45107f, type: 3}
+      propertyPath: _startWidth
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7369958194294985981, guid: 25cc4f25f199bb14388f79af4a45107f, type: 3}
+      propertyPath: _collisionMask.m_Bits
+      value: 384
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

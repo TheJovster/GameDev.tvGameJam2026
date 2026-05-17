@@ -21,6 +21,11 @@ public class FollowCamera : MonoBehaviour
     [SerializeField] private float _positionSmoothing = 8f;
     [SerializeField] private float _rotationSmoothing = 10f;
 
+    [Header("Collision")]
+    [SerializeField] private float _collisionRadius = 0.3f;
+    [SerializeField] private LayerMask _collisionMask = ~0;
+    [SerializeField] private float _pullInOffset = 0.1f;
+
     private float _yaw;
     private float _pitch;
 
@@ -36,7 +41,6 @@ public class FollowCamera : MonoBehaviour
             return;
         }
 
-        // Init angles from current rotation
         Vector3 euler = transform.eulerAngles;
         _yaw = euler.y;
         _pitch = euler.x;
@@ -61,10 +65,20 @@ public class FollowCamera : MonoBehaviour
         Vector3 pivotPos = _boomPivot.position + _offset;
 
         Quaternion targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
-        Vector3 targetPosition = pivotPos - (targetRotation * Vector3.forward * _distance);
+        Vector3 desiredPosition = pivotPos - (targetRotation * Vector3.forward * _distance);
+
+        // Collision: spherecast from pivot toward desired position
+        Vector3 direction = desiredPosition - pivotPos;
+        float desiredDistance = direction.magnitude;
+        Vector3 adjustedPosition = desiredPosition;
+
+        if (Physics.SphereCast(pivotPos, _collisionRadius, direction.normalized, out RaycastHit hit, desiredDistance, _collisionMask))
+        {
+            adjustedPosition = pivotPos + direction.normalized * (hit.distance - _pullInOffset);
+        }
 
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSmoothing * Time.deltaTime);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, _positionSmoothing * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, adjustedPosition, _positionSmoothing * Time.deltaTime);
     }
 
     private void ReadLookInput()
