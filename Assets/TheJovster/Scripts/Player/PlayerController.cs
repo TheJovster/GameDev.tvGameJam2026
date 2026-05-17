@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
             _cameraTransform = cam.transform;
         else
             _cameraTransform = Camera.main.transform;
+        ServiceRegistry.Instance?.SetSceneReferences(null, transform);
     }
 
     private void OnEnable()
@@ -153,4 +154,6 @@ public class PlayerController : MonoBehaviour
             _velocity.y += _gravity * Time.deltaTime;
         }
     }
+
+    void OnDestroy() => ServiceRegistry.Instance?.ClearPlayerReference();
 }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
@@ -14,6 +16,10 @@ public class GameUI : MonoBehaviour
     [Header("Victory Panel")]
     [SerializeField] private GameObject _victoryPanel;
 
+    [Header("Buttons")]
+    [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _quitButton;
+
     private void Start()
     {
         if (_victoryPanel != null)
@@ -21,6 +27,12 @@ public class GameUI : MonoBehaviour
 
         if (_gameManager != null)
             _gameManager.OnVictory.AddListener(ShowVictory);
+
+        if(_resumeButton != null)
+            _resumeButton.onClick.AddListener(UnpauseGame);
+
+        if(_quitButton != null)
+            _quitButton.onClick.AddListener(QuitToMainMenu);
     }
 
     private void Update()
@@ -55,5 +67,20 @@ public class GameUI : MonoBehaviour
     {
         if (_victoryPanel != null)
             _victoryPanel.SetActive(true);
+    }
+
+    private void PauseGame() 
+    {
+
+    }
+
+    private void UnpauseGame() 
+    {
+
+    }
+
+    private void QuitToMainMenu() 
+    {
+
     }
 }

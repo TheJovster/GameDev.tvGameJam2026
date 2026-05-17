@@ -7,7 +7,7 @@ public class ServiceRegistry : MonoBehaviour
     private static ServiceRegistry _instance = null;
     public static ServiceRegistry Instance => _instance;
 
-    [Header("Scene References (auto-found if null)")]
+    [Header("Scene References (refreshed on scene load)")]
     [SerializeField] private Camera _mainCamera = null;
     [SerializeField] private Transform _player = null;
 
@@ -25,21 +25,6 @@ public class ServiceRegistry : MonoBehaviour
         }
 
         _instance = this;
-
-        if (_mainCamera == null)
-        {
-            _mainCamera = Camera.main;
-        }
-
-        if (_player == null)
-        {
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-
-            if (playerObject != null)
-            {
-                _player = playerObject.transform;
-            }
-        }
     }
 
     private void OnDestroy()
@@ -50,9 +35,25 @@ public class ServiceRegistry : MonoBehaviour
         }
     }
 
+    public void SetSceneReferences(Camera cam, Transform player)
+    {
+        if (cam != null) _mainCamera = cam;
+        if (player != null) _player = player;
+    }
+
+    public void ClearPlayerReference()
+    {
+        _player = null;
+    }
+
     public void Register<T>(T service) where T : class
     {
         _services[typeof(T)] = service;
+    }
+
+    public void Unregister<T>() where T : class
+    {
+        _services.Remove(typeof(T));
     }
 
     public T Get<T>() where T : class
@@ -62,7 +63,6 @@ public class ServiceRegistry : MonoBehaviour
             return service as T;
         }
 
-        Debug.LogWarning($"ServiceLocator: {typeof(T).Name} not registered.");
         return null;
     }
 
