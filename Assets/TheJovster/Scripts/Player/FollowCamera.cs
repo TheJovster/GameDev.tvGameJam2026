@@ -67,7 +67,6 @@ public class FollowCamera : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
         Vector3 desiredPosition = pivotPos - (targetRotation * Vector3.forward * _distance);
 
-        // Collision: spherecast from pivot toward desired position
         Vector3 direction = desiredPosition - pivotPos;
         float desiredDistance = direction.magnitude;
         Vector3 adjustedPosition = desiredPosition;
@@ -101,7 +100,6 @@ public class FollowCamera : MonoBehaviour
         Gizmos.DrawLine(transform.position, pivotPos);
         Gizmos.DrawWireSphere(pivotPos, 0.15f);
 
-        // Draw desired position
         Gizmos.color = Color.yellow;
         Quaternion rot = Quaternion.Euler(_pitch, _yaw, 0f);
         Vector3 desiredPos = pivotPos - (rot * Vector3.forward * _distance);
