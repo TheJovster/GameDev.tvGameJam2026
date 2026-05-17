@@ -22,6 +22,7 @@ public class GameUI : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _restartButton;
     [SerializeField] private Button _quitButton;
 
     [Header("Input")]
@@ -57,6 +58,9 @@ public class GameUI : MonoBehaviour
 
         if(_quitButton != null)
             _quitButton.onClick.AddListener(QuitToMainMenu);
+
+        if(_restartButton != null)
+            _restartButton.onClick.AddListener(QuitToMainMenu);
     }
 
     private void Update()
@@ -117,6 +121,6 @@ public class GameUI : MonoBehaviour
 
     private void QuitToMainMenu() 
     {
-
+        ServiceRegistry.Instance.Get<SceneLoader>().LoadScene("MainMenu");
     }
 }

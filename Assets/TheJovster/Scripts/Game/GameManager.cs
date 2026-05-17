@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [Header("Level")]
-    [SerializeField] private CentralBattery _battery;
+    [SerializeField] private CentralBattery _battery = null;
 
     [Header("Events")]
     public UnityEvent OnVictory;
@@ -24,10 +24,6 @@ public class GameManager : MonoBehaviour
     {
         _isComplete = false;
 
-        if (_battery != null)
-        {
-            _battery.OnAllRequiredFilled.AddListener(HandleVictory);
-        }
     }
 
     private void HandleVictory()
@@ -72,5 +68,17 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         _isPaused = false;
+    }
+
+    public void AssignCentralBattery(CentralBattery newBattery)
+    {
+        _battery = newBattery;
+        _battery.OnAllRequiredFilled.AddListener(HandleVictory);
+    }
+
+    public void UnassignCentralBattery() 
+    {
+        _battery.OnAllRequiredFilled.RemoveListener(HandleVictory);
+        _battery = null;
     }
 }

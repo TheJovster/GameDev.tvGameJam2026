@@ -12,6 +12,11 @@ public class CentralBattery : MonoBehaviour, IInteractable
 
     public string InteractionPrompt => "Connect Cable";
 
+    private void Awake()
+    {
+        ServiceRegistry.Instance.Get<GameManager>()?.AssignCentralBattery(this);
+    }
+
     public bool CanInteract(GameObject interactor)
     {
         PlayerInteraction interaction = interactor.GetComponent<PlayerInteraction>();
@@ -82,6 +87,11 @@ public class CentralBattery : MonoBehaviour, IInteractable
             if (_slots[i].IsRequired && _slots[i].IsFilled) count++;
         }
         return count;
+    }
+
+    private void OnDestroy()
+    {
+        ServiceRegistry.Instance.Get<GameManager>()?.UnassignCentralBattery();
     }
 }
 
