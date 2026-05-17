@@ -78,15 +78,30 @@ public class CableTrail : MonoBehaviour
     {
         if (!_isActive) return;
 
-        // Drop a final waypoint at the battery
         _activeSegment.Deactivate();
         Destroy(_activeSegment.gameObject);
 
         CableLine finalSegment = Instantiate(_segmentPrefab, transform);
-        finalSegment.Activate(_lastWaypoint, batterySnapPoint, _color);
+        finalSegment.Activate(_lastWaypoint, batterySnapPoint, _color, true);
         _staticSegments.Add(finalSegment);
 
+        // Detach completed segments and waypoints so Deactivate can't destroy them
+        GameObject completedRun = new GameObject("CompletedCable");
+        for (int i = 0; i < _staticSegments.Count; i++)
+        {
+            if (_staticSegments[i] != null)
+                _staticSegments[i].transform.SetParent(completedRun.transform);
+        }
+        for (int i = 0; i < _waypoints.Count; i++)
+        {
+            if (_waypoints[i] != null)
+                _waypoints[i].SetParent(completedRun.transform);
+        }
+
+        _staticSegments.Clear();
+        _waypoints.Clear();
         _activeSegment = null;
+        _lastWaypoint = null;
         _isActive = false;
     }
 
@@ -125,7 +140,7 @@ public class CableTrail : MonoBehaviour
         Destroy(_activeSegment.gameObject);
 
         CableLine staticSeg = Instantiate(_segmentPrefab, transform);
-        staticSeg.Activate(_lastWaypoint, waypoint, _color);
+        staticSeg.Activate(_lastWaypoint, waypoint, _color, true);
         _staticSegments.Add(staticSeg);
 
         // Spawn new active segment from new waypoint to player

@@ -25,6 +25,8 @@ public class CableLine : MonoBehaviour
     private Vector3[] _currentPositions;
     private Vector3[] _targetPositions;
 
+    private bool _grounded;
+
     private void Awake()
     {
         _lr = GetComponent<LineRenderer>();
@@ -35,16 +37,18 @@ public class CableLine : MonoBehaviour
         _isActive = false;
     }
 
-    public void Activate(Transform from, Transform to, PlugColor color)
+    public void Activate(Transform from, Transform to, PlugColor color, bool grounded = false)
     {
         _pointA = from;
         _pointB = to;
         _isActive = true;
+        _grounded = grounded;
 
         _lr.positionCount = _segmentCount;
         _currentPositions = new Vector3[_segmentCount];
         _targetPositions = new Vector3[_segmentCount];
 
+        // Init positions so the cable doesn't lerp from origin
         for (int i = 0; i < _segmentCount; i++)
         {
             float t = (float)i / (_segmentCount - 1);
@@ -94,16 +98,19 @@ public class CableLine : MonoBehaviour
             float t = (float)i / (_segmentCount - 1);
             Vector3 point = Vector3.Lerp(start, end, t);
 
-            float sag = _sagAmount * distance * 0.1f;
-            float sagOffset = 4f * sag * t * (1f - t);
-            point.y -= sagOffset;
+            if (!_grounded)
+            {
+                float sag = _sagAmount * distance * 0.1f;
+                float sagOffset = 4f * sag * t * (1f - t);
+                point.y -= sagOffset;
+            }
 
             Vector3 rayOrigin = point + Vector3.up * _raycastHeight;
 
             if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, _raycastHeight * 2f, _collisionMask))
             {
                 float surfaceY = hit.point.y + _surfaceOffset;
-                if (point.y < surfaceY)
+                if (_grounded || point.y < surfaceY)
                 {
                     point.y = surfaceY;
                 }
