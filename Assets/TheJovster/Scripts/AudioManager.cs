@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
 
     [Header("Audio Sources")]
     [SerializeField] private AudioSource _musicSource;
@@ -28,8 +29,13 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (ServiceRegistry.Instance != null)
-            ServiceRegistry.Instance.Register(this);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
 
         if (_musicSource == null)
         {
@@ -45,7 +51,20 @@ public class AudioManager : MonoBehaviour
             _sfxSource.playOnAwake = false;
         }
 
+        LoadVolumePrefs();
         ApplyVolumes();
+    }
+
+    private void Start()
+    {
+        if (ServiceRegistry.Instance != null)
+            ServiceRegistry.Instance.Register(this);
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 
     public void PlaySFX(AudioClip clip)
@@ -79,26 +98,48 @@ public class AudioManager : MonoBehaviour
     public void PlayGameMusic() => PlayMusic(_gameMusic);
     public void PlayVictoryMusic() => PlayMusic(_victoryMusic);
 
+    public float MasterVolume => _masterVolume;
+    public float MusicVolume => _musicVolume;
+    public float SFXVolume => _sfxVolume;
+
     public void SetMasterVolume(float vol)
     {
         _masterVolume = Mathf.Clamp01(vol);
         ApplyVolumes();
+        SaveVolumePrefs();
     }
 
     public void SetMusicVolume(float vol)
     {
         _musicVolume = Mathf.Clamp01(vol);
         ApplyVolumes();
+        SaveVolumePrefs();
     }
 
     public void SetSFXVolume(float vol)
     {
         _sfxVolume = Mathf.Clamp01(vol);
         ApplyVolumes();
+        SaveVolumePrefs();
     }
 
     private void ApplyVolumes()
     {
         _musicSource.volume = _musicVolume * _masterVolume;
+    }
+
+    private void LoadVolumePrefs()
+    {
+        _masterVolume = PlayerPrefs.GetFloat("vol_master", 1f);
+        _musicVolume = PlayerPrefs.GetFloat("vol_music", 0.5f);
+        _sfxVolume = PlayerPrefs.GetFloat("vol_sfx", 0.7f);
+    }
+
+    private void SaveVolumePrefs()
+    {
+        PlayerPrefs.SetFloat("vol_master", _masterVolume);
+        PlayerPrefs.SetFloat("vol_music", _musicVolume);
+        PlayerPrefs.SetFloat("vol_sfx", _sfxVolume);
+        PlayerPrefs.Save();
     }
 }
