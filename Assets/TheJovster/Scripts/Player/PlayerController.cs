@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _groundStickForce = -2f;
     [SerializeField] private float _coyoteTime = 0.15f;
 
-    private CharacterController _cc;
+    private CharacterController _characterController;
     private Transform _cameraTransform;
     private Vector3 _velocity;
     private Vector2 _moveInput;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _cc = GetComponent<CharacterController>();
+        _characterController = GetComponent<CharacterController>();
     }
 
     private void Start()
@@ -108,12 +108,12 @@ public class PlayerController : MonoBehaviour
         UpdateCoyoteTimer();
         HandleMovement();
         ApplyGravity();
-        _cc.Move(_velocity * Time.deltaTime);
+        _characterController.Move(_velocity * Time.deltaTime);
     }
 
     private void UpdateCoyoteTimer()
     {
-        if (_cc.isGrounded)
+        if (_characterController.isGrounded)
         {
             _coyoteTimer = _coyoteTime;
             _hasJumped = false;
@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (_cc.isGrounded && _velocity.y < 0f)
+        if (_characterController.isGrounded && _velocity.y < 0f)
         {
             _velocity.y = _groundStickForce;
         }
