@@ -90843,11 +90843,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CentralBattery
   _slots:
   - _color: 0
-    _isRequired: 0
+    _isRequired: 1
     _snapPoint: {fileID: 113167107}
     _slotRenderer: {fileID: 113167104}
   - _color: 1
-    _isRequired: 0
+    _isRequired: 1
     _snapPoint: {fileID: 1553002670}
     _slotRenderer: {fileID: 1553002667}
   OnSlotFilled:

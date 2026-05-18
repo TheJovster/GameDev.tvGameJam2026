@@ -30,10 +30,10 @@ public class GameManager : MonoBehaviour
     {
         if (_isComplete) return;
         _isComplete = true;
-
+        PauseGame();
+        SetCursorState(true);
         Debug.Log("ALL REQUIRED SLOTS FILLED — VICTORY");
         OnVictory?.Invoke();
-        PauseGame();
     }
 
     public float GetProgress()
@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
     private void HandleSceneLoadFinished()
     {
         _isComplete = false;
+        SetCursorState(true);
         if(_battery != null) 
         {
             UnassignCentralBattery();

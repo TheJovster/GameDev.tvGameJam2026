@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,28 +13,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpForce = 8f;
     [SerializeField] private float _gravity = -20f;
     [SerializeField] private float _groundStickForce = -2f;
+    [SerializeField] private float _coyoteTime = 0.15f;
 
     private CharacterController _cc;
     private Transform _cameraTransform;
     private Vector3 _velocity;
     private Vector2 _moveInput;
     private bool _isSprinting;
+    private float _coyoteTimer;
+    private bool _hasJumped;
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference _moveAction;
     [SerializeField] private InputActionReference _jumpAction;
     [SerializeField] private InputActionReference _sprintAction;
 
-    [Header("Components")]
-    [SerializeField] private Knockbackable _knockbackable = null;
-
     private void Awake()
     {
         _cc = GetComponent<CharacterController>();
-        if(_knockbackable == null)
-        {
-            _knockbackable = GetComponent<Knockbackable>();
-        }
     }
 
     private void Start()
@@ -45,7 +40,6 @@ public class PlayerController : MonoBehaviour
             _cameraTransform = cam.transform;
         else
             _cameraTransform = Camera.main.transform;
-        ServiceRegistry.Instance?.SetSceneReferences(null, transform);
     }
 
     private void OnEnable()
@@ -98,9 +92,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext ctx)
     {
-        if (_cc.isGrounded)
+        if (_coyoteTimer > 0f && !_hasJumped)
         {
             _velocity.y = _jumpForce;
+            _hasJumped = true;
+            _coyoteTimer = 0f;
         }
     }
 
@@ -109,15 +105,27 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        UpdateCoyoteTimer();
         HandleMovement();
         ApplyGravity();
         _cc.Move(_velocity * Time.deltaTime);
     }
 
+    private void UpdateCoyoteTimer()
+    {
+        if (_cc.isGrounded)
+        {
+            _coyoteTimer = _coyoteTime;
+            _hasJumped = false;
+        }
+        else
+        {
+            _coyoteTimer -= Time.deltaTime;
+        }
+    }
+
     private void HandleMovement()
     {
-        if (_knockbackable.IsKnockedBack) return;
-
         Vector3 camForward = _cameraTransform.forward;
         Vector3 camRight = _cameraTransform.right;
         camForward.y = 0f;
@@ -128,10 +136,6 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = camForward * _moveInput.y + camRight * _moveInput.x;
 
         float speed = _isSprinting ? _moveSpeed * _sprintMultiplier : _moveSpeed;
-        if(!_cc.isGrounded)
-        {
-            speed = _moveSpeed; ;
-        }
 
         _velocity.x = moveDir.x * speed;
         _velocity.z = moveDir.z * speed;
@@ -154,6 +158,4 @@ public class PlayerController : MonoBehaviour
             _velocity.y += _gravity * Time.deltaTime;
         }
     }
-
-    void OnDestroy() => ServiceRegistry.Instance?.ClearPlayerReference();
 }
