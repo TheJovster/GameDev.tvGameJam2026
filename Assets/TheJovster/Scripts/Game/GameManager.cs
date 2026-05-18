@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _isComplete = false;
-
+        ServiceRegistry.Instance.Get<SceneLoader>().OnSceneLoadFinished += HandleSceneLoadFinished;
     }
 
     private void HandleVictory()
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         UnpauseGame();
-        SceneManager.LoadSceneAsync(0); // Assuming the main level is at index 0 - need a more robust scene management strategy for later
+        ServiceRegistry.Instance.Get<SceneLoader>().ReloadCurrentScene(); // Assuming the main level is at index 0 - need a more robust scene management strategy for later
     }
 
     public int GetFilledCount() => _battery != null ? _battery.GetRequiredFilledCount() : 0;
@@ -57,17 +57,19 @@ public class GameManager : MonoBehaviour
     public void PauseGame() 
     {
         Time.timeScale = 0f;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         _isPaused = true;
     }
 
     public void UnpauseGame() 
     {
         Time.timeScale = 1f;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         _isPaused = false;
+    }
+
+    public void SetCursorState(bool value) 
+    {
+        Cursor.visible = value;
+        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     public void AssignCentralBattery(CentralBattery newBattery)
@@ -78,7 +80,17 @@ public class GameManager : MonoBehaviour
 
     public void UnassignCentralBattery() 
     {
+        if (_battery != null) { return; } 
         _battery.OnAllRequiredFilled.RemoveListener(HandleVictory);
         _battery = null;
+    }
+
+    private void HandleSceneLoadFinished()
+    {
+        _isComplete = false;
+        if(_battery != null) 
+        {
+            UnassignCentralBattery();
+        }
     }
 }

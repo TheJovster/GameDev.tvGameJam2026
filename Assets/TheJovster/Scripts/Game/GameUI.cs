@@ -43,10 +43,14 @@ public class GameUI : MonoBehaviour
     private void Awake()
     {
         _gameManager = ServiceRegistry.Instance.Get<GameManager>();
+        _playerInteraction = ServiceRegistry.Instance.Get<PlayerInteraction>();
+
     }
 
     private void Start()
     {
+
+
         if (_victoryPanel != null)
             _victoryPanel.SetActive(false);
 
@@ -110,17 +114,20 @@ public class GameUI : MonoBehaviour
     private void PauseGame()
     {
         _pausePanel.SetActive(true);
+        _gameManager.SetCursorState(true);
         _gameManager.PauseGame();
     }
 
     private void UnpauseGame()
     {
         _pausePanel.SetActive(false);
+        _gameManager.SetCursorState(false);
         _gameManager.UnpauseGame();
     }
 
     private void QuitToMainMenu() 
     {
+        _gameManager.UnpauseGame();
         ServiceRegistry.Instance.Get<SceneLoader>().LoadScene("MainMenu");
     }
 }

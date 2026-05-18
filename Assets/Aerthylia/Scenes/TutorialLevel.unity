@@ -4220,6 +4220,22 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &365615091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8111526056558494477, guid: 671be2ee43fe8df42be399aba0c1137f, type: 3}
+  m_PrefabInstance: {fileID: 1422621431}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1 &365615092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5337399545774140919, guid: 671be2ee43fe8df42be399aba0c1137f, type: 3}
+  m_PrefabInstance: {fileID: 1422621431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &378944322
 Mesh:
   m_ObjectHideFlags: 0
@@ -88016,10 +88032,10 @@ MonoBehaviour:
   _playerInteraction: {fileID: 0}
   _progressText: {fileID: 1422621437}
   _interactPromptText: {fileID: 1422621436}
-  _victoryPanel: {fileID: 0}
+  _victoryPanel: {fileID: 365615092}
   _pausePanel: {fileID: 1422621435}
   _resumeButton: {fileID: 1422621434}
-  _restartButton: {fileID: 0}
+  _restartButton: {fileID: 365615091}
   _quitButton: {fileID: 1422621433}
   _pauseKey: {fileID: 8337886938325728956, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &1006976919 stripped

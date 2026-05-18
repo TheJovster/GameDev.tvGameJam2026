@@ -4,11 +4,13 @@ public class MainMenuUI : MonoBehaviour
 {
     public void StartGame() 
     {
+        ServiceRegistry.Instance?.Get<GameManager>()?.UnpauseGame();
         ServiceRegistry.Instance?.Get<SceneLoader>()?.LoadScene("Gym");
     }
 
     public void Tutorial() 
     {
+        ServiceRegistry.Instance?.Get<GameManager>()?.UnpauseGame();
         ServiceRegistry.Instance?.Get<SceneLoader>()?.LoadScene("TutorialLevel");
     }
 

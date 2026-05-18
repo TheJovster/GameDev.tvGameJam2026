@@ -25,6 +25,12 @@ public class PlayerInteraction : MonoBehaviour
     public SocketHub TetheredDevice => _tetheredDevice;
     public Transform CableAttachPoint => _cableAttachPoint != null ? _cableAttachPoint : transform;
 
+    private void Awake()
+    {
+        ServiceRegistry.Instance.Register<PlayerInteraction>(null);
+        ServiceRegistry.Instance.Register<PlayerInteraction>(this);
+    }
+
     private void OnEnable()
     {
         if (_interactAction != null)

@@ -26,17 +26,28 @@ public class SceneLoader : MonoBehaviour
     public void LoadScene(int buildIndex)
     {
         if (_isLoading) return;
+        if(Time.timeScale < 1f)
+        {
+            Time.timeScale = 1f;
+        }
         StartCoroutine(LoadSceneRoutine(buildIndex));
     }
 
     public void ReloadCurrentScene()
     {
+        if (Time.timeScale < 1f)
+        {
+            Time.timeScale = 1f;
+        }
         LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1f;
+        if (Time.timeScale < 1f)
+        {
+            Time.timeScale = 1f;
+        }
         LoadScene("MainMenu");
     }
 
@@ -53,7 +64,6 @@ public class SceneLoader : MonoBehaviour
     {
         _isLoading = true;
         OnSceneLoadStarted?.Invoke();
-
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
         while (!op.isDone)
         {
