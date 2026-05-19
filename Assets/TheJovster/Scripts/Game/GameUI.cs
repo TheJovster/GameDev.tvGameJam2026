@@ -47,6 +47,7 @@ public class GameUI : MonoBehaviour
     {
         _gameManager = ServiceRegistry.Instance.Get<GameManager>();
         _playerInteraction = ServiceRegistry.Instance.Get<PlayerInteraction>();
+        _sceneLoader = ServiceRegistry.Instance.Get<SceneLoader>();
 
     }
 
