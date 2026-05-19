@@ -8,6 +8,7 @@ public class GameUI : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameManager _gameManager;
+    [SerializeField] private SceneLoader _sceneLoader;
     [SerializeField] private PlayerInteraction _playerInteraction;
 
     [Header("HUD Elements")]
@@ -32,12 +33,14 @@ public class GameUI : MonoBehaviour
     {
         if (_pauseKey != null)
             _pauseKey.action.performed += OnPauseKeyPressed;
+        _sceneLoader.OnSceneLoadFinished += InitializeGameUI;
     }
 
     private void OnDisable()
     {
         if (_pauseKey != null)
             _pauseKey.action.performed -= OnPauseKeyPressed;
+        _sceneLoader.OnSceneLoadFinished -= InitializeGameUI;
     }
 
     private void Awake()
@@ -49,21 +52,24 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
+        InitializeGameUI();
+    }
 
-
+    private void InitializeGameUI()
+    {
         if (_victoryPanel != null)
             _victoryPanel.SetActive(false);
 
         if (_gameManager != null)
             _gameManager.OnVictory.AddListener(ShowVictory);
 
-        if(_resumeButton != null)
+        if (_resumeButton != null)
             _resumeButton.onClick.AddListener(UnpauseGame);
 
-        if(_quitButton != null)
+        if (_quitButton != null)
             _quitButton.onClick.AddListener(QuitToMainMenu);
 
-        if(_restartButton != null)
+        if (_restartButton != null)
             _restartButton.onClick.AddListener(QuitToMainMenu);
     }
 
