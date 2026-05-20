@@ -13,6 +13,7 @@ public class PlayerAnimationController : MonoBehaviour
     private static readonly int _speedHash = Animator.StringToHash("Speed");
     private static readonly int _jumpHash = Animator.StringToHash("Jump");
     private static readonly int _isGroundedHash = Animator.StringToHash("IsGrounded");
+    private static readonly int _fallSpeedHash = Animator.StringToHash("FallSpeed");
 
     private bool _wasGrounded = true;
 
@@ -34,6 +35,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         _animator.SetFloat(_speedHash, horizontalSpeed, _speedDampTime, Time.deltaTime);
         _animator.SetBool(_isGroundedHash, _playerController.IsGrounded);
+        _animator.SetFloat(_fallSpeedHash, vel.y);
     }
 
     public void TriggerJump()
