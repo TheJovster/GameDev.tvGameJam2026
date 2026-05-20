@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference _jumpAction;
     [SerializeField] private InputActionReference _sprintAction;
 
+    public Vector3 CurrentVelocity => _velocity;
+    public bool IsGrounded => _characterController.isGrounded;
+
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
