@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _groundStickForce = -2f;
     [SerializeField] private float _coyoteTime = 0.15f;
 
+
+    private PlayerAnimationController _animator;
     private CharacterController _characterController;
     private Transform _cameraTransform;
     private Vector3 _velocity;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _animator = GetComponentInChildren<PlayerAnimationController>();
     }
 
     private void Start()
@@ -95,6 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext ctx)
     {
+        _animator.TriggerJump();
         if (_coyoteTimer > 0f && !_hasJumped)
         {
             _velocity.y = _jumpForce;
@@ -161,4 +165,6 @@ public class PlayerController : MonoBehaviour
             _velocity.y += _gravity * Time.deltaTime;
         }
     }
+
+
 }

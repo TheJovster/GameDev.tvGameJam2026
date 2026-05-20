@@ -34,12 +34,10 @@ public class PlayerAnimationController : MonoBehaviour
 
         _animator.SetFloat(_speedHash, horizontalSpeed, _speedDampTime, Time.deltaTime);
         _animator.SetBool(_isGroundedHash, _playerController.IsGrounded);
+    }
 
-        if (_wasGrounded && !_playerController.IsGrounded && vel.y > 0f)
-        {
-            _animator.SetTrigger(_jumpHash);
-        }
-
-        _wasGrounded = _playerController.IsGrounded;
+    public void TriggerJump()
+    {
+        _animator.SetTrigger(_jumpHash);
     }
 }
