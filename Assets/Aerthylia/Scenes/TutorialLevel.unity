@@ -87917,6 +87917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameUI
   _gameManager: {fileID: 0}
+  _sceneLoader: {fileID: 0}
   _playerInteraction: {fileID: 0}
   _progressText: {fileID: 1422621437}
   _interactPromptText: {fileID: 1422621436}
