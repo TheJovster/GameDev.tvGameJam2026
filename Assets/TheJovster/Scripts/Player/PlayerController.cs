@@ -98,12 +98,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext ctx)
     {
-        _animator.TriggerJump();
         if (_coyoteTimer > 0f && !_hasJumped)
         {
             _velocity.y = _jumpForce;
             _hasJumped = true;
             _coyoteTimer = 0f;
+            _animator.TriggerJump();
+
         }
     }
 
