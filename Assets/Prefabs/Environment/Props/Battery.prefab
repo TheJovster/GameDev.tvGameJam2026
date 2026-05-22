@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 551445539710561265}
   - component: {fileID: 3360387583759709193}
   - component: {fileID: 3692577923298426363}
+  - component: {fileID: 1971413515746814293}
   m_Layer: 0
   m_Name: Battery
   m_TagString: Untagged
@@ -89,4 +90,26 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452736025827352390}
+  m_Mesh: {fileID: -2159965483007997719, guid: a51bdadce1787224fab82db8280dac15, type: 3}
+--- !u!64 &1971413515746814293
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452736025827352390}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
   m_Mesh: {fileID: -2159965483007997719, guid: a51bdadce1787224fab82db8280dac15, type: 3}
