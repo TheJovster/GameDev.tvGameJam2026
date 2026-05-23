@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _gravity = -20f;
     [SerializeField] private float _groundStickForce = -2f;
     [SerializeField] private float _coyoteTime = 0.15f;
+    [SerializeField] private bool _enableCoyoteTime = true;
+
 
 
     private PlayerAnimationController _animator;
@@ -98,13 +100,19 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext ctx)
     {
-        if (_coyoteTimer > 0f && !_hasJumped)
+        if (_enableCoyoteTime && _coyoteTimer > 0f && !_hasJumped)
         {
             _velocity.y = _jumpForce;
             _hasJumped = true;
             _coyoteTimer = 0f;
             _animator.TriggerJump();
+            return;
+        }
 
+        if (!_enableCoyoteTime && _characterController.isGrounded)
+        {
+            _velocity.y = _jumpForce;
+            _animator.TriggerJump();
         }
     }
 
