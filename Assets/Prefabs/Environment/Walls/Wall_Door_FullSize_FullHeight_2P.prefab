@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_Door_FullSize_FullHeight_2P
       objectReference: {fileID: 0}
+    - target: {fileID: 5512724556192156108, guid: 476a2ad5eb90b9a47aa3e143667c3fd6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.98
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
