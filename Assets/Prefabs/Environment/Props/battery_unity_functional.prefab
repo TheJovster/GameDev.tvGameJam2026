@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 307829120149157931}
   - component: {fileID: 8781627357052325347}
   - component: {fileID: 1080229755802537297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plug1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 8288820426921622434}
   - component: {fileID: 3744104222883170541}
   - component: {fileID: 6000317147748904518}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plug2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 350961154184860355}
   - component: {fileID: 3654627167836670697}
   - component: {fileID: 4549483002988392386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plug3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,6 +321,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a51bdadce1787224fab82db8280dac15, type: 3}
       propertyPath: m_Name
       value: battery_unity_functional
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a51bdadce1787224fab82db8280dac15, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
