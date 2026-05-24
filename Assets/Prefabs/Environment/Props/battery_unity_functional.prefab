@@ -391,16 +391,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CentralBattery
   _slots:
-  - _color: 0
-    _isRequired: 0
+  - _color: 1
+    _isRequired: 1
     _snapPoint: {fileID: 307829120149157931}
     _slotRenderer: {fileID: 1080229755802537297}
   - _color: 0
-    _isRequired: 0
+    _isRequired: 1
     _snapPoint: {fileID: 8288820426921622434}
     _slotRenderer: {fileID: 6000317147748904518}
-  - _color: 0
-    _isRequired: 0
+  - _color: 2
+    _isRequired: 1
     _snapPoint: {fileID: 350961154184860355}
     _slotRenderer: {fileID: 4549483002988392386}
   OnSlotFilled:
