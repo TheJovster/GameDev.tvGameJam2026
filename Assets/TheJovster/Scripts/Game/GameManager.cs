@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     {
         _isComplete = false;
         ServiceRegistry.Instance.Get<SceneLoader>().OnSceneLoadFinished += HandleSceneLoadFinished;
+        ServiceRegistry.Instance.Get<AudioManager>()?.PlayMenuMusic();
     }
 
     private void HandleVictory()
