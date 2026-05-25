@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: cca9aecc121708941817e2c816669383
   - enabled: 1
-    path: Assets/Aerthylia/Scenes/Level01.unity
-    guid: 2f896cf09d14e414dac305310638dac0
+    path: Assets/Aerthylia/Scenes/Level01_NEW.unity
+    guid: 08dea219f26fc0248b7709c17e445167
   - enabled: 1
     path: Assets/Aerthylia/Scenes/TutorialLevel.unity
     guid: 874f688ff48930346a1ddf62aeabd63f

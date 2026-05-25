@@ -46,7 +46,7 @@ public class GameUI : MonoBehaviour
     private void Awake()
     {
         _gameManager = ServiceRegistry.Instance.Get<GameManager>();
-        _playerInteraction = ServiceRegistry.Instance.Get<PlayerInteraction>();
+        _playerInteraction = FindFirstObjectByType<PlayerInteraction>();
         _sceneLoader = ServiceRegistry.Instance.Get<SceneLoader>();
 
     }
@@ -93,11 +93,11 @@ public class GameUI : MonoBehaviour
         string prompt = _playerInteraction.GetCurrentPrompt();
         if (string.IsNullOrEmpty(prompt))
         {
-            _interactPromptText.enabled = false;
+            _interactPromptText.gameObject.SetActive(false);
         }
         else
         {
-            _interactPromptText.enabled = true;
+            _interactPromptText.gameObject.SetActive(true);
             _interactPromptText.text = prompt;
         }
     }
