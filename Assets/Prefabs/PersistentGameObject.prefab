@@ -210,7 +210,7 @@ MonoBehaviour:
   _musicVolume: 0.5
   _sfxVolume: 0.7
   _menuMusic: {fileID: 0}
-  _gameMusic: {fileID: 0}
+  _gameMusic: {fileID: 8300000, guid: 82195099713de1144bfe10142d985436, type: 3}
   _victoryMusic: {fileID: 0}
   _footsteps: []
   _sfxTether: {fileID: 8300000, guid: df1a7824bc097454d995e5fa88ad315c, type: 3}

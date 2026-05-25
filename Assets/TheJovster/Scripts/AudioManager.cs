@@ -127,6 +127,12 @@ public class AudioManager : MonoBehaviour
         SaveVolumePrefs();
     }
 
+    public void StopGameMusic()
+    {
+        if (_musicSource.clip == _gameMusic)
+            StopMusic();
+    }
+
     private void ApplyVolumes()
     {
         _musicSource.volume = _musicVolume * _masterVolume;

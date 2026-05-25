@@ -9,10 +9,14 @@ public class MainMenuUI : MonoBehaviour
     {
         ServiceRegistry.Instance?.Get<GameManager>()?.UnpauseGame();
         ServiceRegistry.Instance?.Get<SceneLoader>()?.LoadScene(_level01);
+        ServiceRegistry.Instance?.Get<AudioManager>().StopGameMusic();
+        ServiceRegistry.Instance?.Get<AudioManager>()?.PlayGameMusic();
     }
 
     public void Tutorial() 
     {
+        ServiceRegistry.Instance?.Get<AudioManager>().StopGameMusic();
+        ServiceRegistry.Instance?.Get<AudioManager>()?.PlayGameMusic();
         ServiceRegistry.Instance?.Get<GameManager>()?.UnpauseGame();
         ServiceRegistry.Instance?.Get<SceneLoader>()?.LoadScene(_tutorial);
     }

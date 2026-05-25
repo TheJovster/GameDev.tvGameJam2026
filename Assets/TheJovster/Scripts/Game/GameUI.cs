@@ -135,6 +135,8 @@ public class GameUI : MonoBehaviour
     private void QuitToMainMenu() 
     {
         _gameManager.UnpauseGame();
+        ServiceRegistry.Instance.Get<AudioManager>()?.StopGameMusic();
+        ServiceRegistry.Instance.Get<AudioManager>()?.PlayMenuMusic();
         ServiceRegistry.Instance.Get<SceneLoader>().LoadScene("MainMenu");
     }
 }
