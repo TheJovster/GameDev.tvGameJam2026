@@ -109,6 +109,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void TetherTo(SocketHub device)
     {
+        ServiceRegistry.Instance.Get<AudioManager>()?.PlayTether();
+
         _tetheredDevice = device;
         _tetheredDevice.SetTethered(true);
 
@@ -120,6 +122,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (_tetheredDevice == null) return;
 
+        ServiceRegistry.Instance.Get<AudioManager>()?.PlayPlugIn();
         Transform snapPoint = battery.ConnectPlug(_tetheredDevice.PlugColor);
         if (snapPoint == null) return;
 
@@ -133,6 +136,8 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (_tetheredDevice == null) return;
 
+
+        ServiceRegistry.Instance.Get<AudioManager>()?.PlayDisconnect();
         _tetheredDevice.SetTethered(false);
         _tetheredDevice = null;
 

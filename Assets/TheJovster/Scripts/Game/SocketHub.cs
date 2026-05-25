@@ -35,6 +35,7 @@ public class SocketHub : MonoBehaviour, IInteractable
     public void Interact(GameObject interactor)
     {
         // PlayerInteraction handles the actual tether setup
+        ServiceRegistry.Instance.Get<AudioManager>()?.PlayPlugIn();
     }
 
     public void SetTethered(bool tethered)

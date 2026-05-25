@@ -209,12 +209,13 @@ MonoBehaviour:
   _masterVolume: 1
   _musicVolume: 0.5
   _sfxVolume: 0.7
-  _menuMusic: {fileID: 0}
+  _menuMusic: {fileID: 8300000, guid: 1bba03d6d408fe04593ea383dfaf4e58, type: 3}
   _gameMusic: {fileID: 0}
   _victoryMusic: {fileID: 0}
-  _sfxTether: {fileID: 0}
-  _sfxDisconnect: {fileID: 0}
-  _sfxPlugIn: {fileID: 0}
+  _footsteps: []
+  _sfxTether: {fileID: 8300000, guid: cfd34bf3f6db77c4291f632e2068be3c, type: 3}
+  _sfxDisconnect: {fileID: 8300000, guid: 02b146064b1224942ac8638ca023fa62, type: 3}
+  _sfxPlugIn: {fileID: 8300000, guid: 1bba03d6d408fe04593ea383dfaf4e58, type: 3}
   _sfxHazardHit: {fileID: 0}
   _sfxJump: {fileID: 0}
   _sfxVictory: {fileID: 0}
