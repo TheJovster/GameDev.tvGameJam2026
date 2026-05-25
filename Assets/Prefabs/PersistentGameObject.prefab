@@ -209,16 +209,16 @@ MonoBehaviour:
   _masterVolume: 1
   _musicVolume: 0.5
   _sfxVolume: 0.7
-  _menuMusic: {fileID: 8300000, guid: 1bba03d6d408fe04593ea383dfaf4e58, type: 3}
+  _menuMusic: {fileID: 0}
   _gameMusic: {fileID: 0}
   _victoryMusic: {fileID: 0}
   _footsteps: []
-  _sfxTether: {fileID: 8300000, guid: cfd34bf3f6db77c4291f632e2068be3c, type: 3}
+  _sfxTether: {fileID: 8300000, guid: df1a7824bc097454d995e5fa88ad315c, type: 3}
   _sfxDisconnect: {fileID: 8300000, guid: 02b146064b1224942ac8638ca023fa62, type: 3}
   _sfxPlugIn: {fileID: 8300000, guid: 1bba03d6d408fe04593ea383dfaf4e58, type: 3}
-  _sfxHazardHit: {fileID: 0}
-  _sfxJump: {fileID: 0}
-  _sfxVictory: {fileID: 0}
+  _sfxHazardHit: {fileID: 8300000, guid: bb1d52c978ac966478cfc5519873f2ea, type: 3}
+  _sfxJump: {fileID: 8300000, guid: 6f1af20174d51ee4498cc2eace0c007f, type: 3}
+  _sfxVictory: {fileID: 8300000, guid: c1a07765479051441b33861bf15333f4, type: 3}
 --- !u!114 &2010470024903281073
 MonoBehaviour:
   m_ObjectHideFlags: 0

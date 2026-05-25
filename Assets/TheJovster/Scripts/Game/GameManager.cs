@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     {
         if (_isComplete) return;
         _isComplete = true;
+        //play victor music
+        ServiceRegistry.Instance.Get<AudioManager>()?.PlayVictorySFX();
         PauseGame();
         SetCursorState(true);
         Debug.Log("ALL REQUIRED SLOTS FILLED — VICTORY");

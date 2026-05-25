@@ -100,6 +100,7 @@ public class AudioManager : MonoBehaviour
     public void PlayMenuMusic() => PlayMusic(_menuMusic);
     public void PlayGameMusic() => PlayMusic(_gameMusic);
     public void PlayVictoryMusic() => PlayMusic(_victoryMusic);
+    public void PlayVictorySFX() => PlaySFX(_sfxVictory);
 
     public float MasterVolume => _masterVolume;
     public float MusicVolume => _musicVolume;
