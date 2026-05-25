@@ -48,8 +48,8 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 128
-  _groundRayHeight: 5
-  _groundOffset: 0.05
+  _groundRayHeight: 2
+  _groundOffset: 0.1
   _segmentPrefab: {fileID: 2632813081736231392}
 --- !u!1 &6577107755038727184
 GameObject:
@@ -115,6 +115,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264326610732952067, guid: 958c54c04cfac4b499ea299493b70fcc, type: 3}
       propertyPath: _raycastHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264326610732952067, guid: 958c54c04cfac4b499ea299493b70fcc, type: 3}
+      propertyPath: _surfaceOffset
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5264326610732952067, guid: 958c54c04cfac4b499ea299493b70fcc, type: 3}
@@ -261,6 +265,14 @@ PrefabInstance:
     - target: {fileID: 1651501771510498188, guid: 9dc72e8911a9bb043865561cb4983cc9, type: 3}
       propertyPath: _startWidth
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651501771510498188, guid: 9dc72e8911a9bb043865561cb4983cc9, type: 3}
+      propertyPath: _raycastHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651501771510498188, guid: 9dc72e8911a9bb043865561cb4983cc9, type: 3}
+      propertyPath: _surfaceOffset
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1651501771510498188, guid: 9dc72e8911a9bb043865561cb4983cc9, type: 3}
       propertyPath: _collisionMask.m_Bits

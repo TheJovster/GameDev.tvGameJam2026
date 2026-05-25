@@ -26,9 +26,9 @@ public static class PlugColorHelper
 
     public static void ApplyColor(PlugColor plugColor, Renderer renderer)
     {
-        if (Application.isPlaying)
+/*        if (Application.isPlaying)
             renderer.material.SetColor("_BaseColor", ToColor(plugColor));
         else
-            renderer.sharedMaterial.SetColor("_BaseColor", ToColor(plugColor));
+            renderer.sharedMaterial.SetColor("_BaseColor", ToColor(plugColor));*/
     }
 }

@@ -1291,6 +1291,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1593157804}
     m_Modifications:
+    - target: {fileID: -8757382142937152027, guid: 8a26dfe392de240428609e45895dbc92, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2404674501551465810, guid: 8a26dfe392de240428609e45895dbc92, type: 3}
       propertyPath: m_Name
       value: Ceiling_Edge_Simple (1)
@@ -3224,6 +3228,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: battery_unity_functional
       objectReference: {fileID: 0}
+    - target: {fileID: 1080229755802537297, guid: 4e1c7936a022ca74db99965258d4d7f5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 656d025fe01c155459d9f1316a15934e, type: 2}
+    - target: {fileID: 4549483002988392386, guid: 4e1c7936a022ca74db99965258d4d7f5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f1d8be5142ebd1343970fe4ffd692556, type: 2}
+    - target: {fileID: 6000317147748904518, guid: 4e1c7936a022ca74db99965258d4d7f5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 99e65c16ee998dc49a5d9898757c2bd7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3521,18 +3537,6 @@ PrefabInstance:
       value: Ceiling_Edge_Simple
       objectReference: {fileID: 0}
     - target: {fileID: 3032275066161889256, guid: 8a26dfe392de240428609e45895dbc92, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032275066161889256, guid: 8a26dfe392de240428609e45895dbc92, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032275066161889256, guid: 8a26dfe392de240428609e45895dbc92, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032275066161889256, guid: 8a26dfe392de240428609e45895dbc92, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.87
       objectReference: {fileID: 0}
@@ -3571,10 +3575,6 @@ PrefabInstance:
     - target: {fileID: 3032275066161889256, guid: 8a26dfe392de240428609e45895dbc92, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032275066161889256, guid: 8a26dfe392de240428609e45895dbc92, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3785,6 +3785,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: device
       objectReference: {fileID: 0}
+    - target: {fileID: 3576116474343057925, guid: 0954a045cedb51c488c8652757e4b8c0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 656d025fe01c155459d9f1316a15934e, type: 2}
     - target: {fileID: 6335842863927279969, guid: 0954a045cedb51c488c8652757e4b8c0, type: 3}
       propertyPath: _plugColor
       value: 1
@@ -3857,6 +3861,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1593157804}
     m_Modifications:
+    - target: {fileID: -75671329068716524, guid: e5effb2b399672a45a94626b679c5dde, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 413010484755508824, guid: e5effb2b399672a45a94626b679c5dde, type: 3}
       propertyPath: m_Name
       value: Ceiling_Corner_Simple
@@ -9134,6 +9142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: device (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3576116474343057925, guid: 0954a045cedb51c488c8652757e4b8c0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f1d8be5142ebd1343970fe4ffd692556, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13316,7 +13328,7 @@ GameObject:
   - component: {fileID: 1051729881}
   - component: {fileID: 1051729880}
   - component: {fileID: 1051729879}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePool (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17087,18 +17099,6 @@ PrefabInstance:
       value: Ceiling_Middle_Simple
       objectReference: {fileID: 0}
     - target: {fileID: 8818186487635376929, guid: 6a982f9206b5ccf4fad403e7747ad18c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8818186487635376929, guid: 6a982f9206b5ccf4fad403e7747ad18c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8818186487635376929, guid: 6a982f9206b5ccf4fad403e7747ad18c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8818186487635376929, guid: 6a982f9206b5ccf4fad403e7747ad18c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.86
       objectReference: {fileID: 0}
@@ -17137,10 +17137,6 @@ PrefabInstance:
     - target: {fileID: 8818186487635376929, guid: 6a982f9206b5ccf4fad403e7747ad18c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8818186487635376929, guid: 6a982f9206b5ccf4fad403e7747ad18c, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20158,7 +20154,7 @@ GameObject:
   - component: {fileID: 1599561657}
   - component: {fileID: 1599561656}
   - component: {fileID: 1599561655}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26978,6 +26974,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: device_red
       objectReference: {fileID: 0}
+    - target: {fileID: 3576116474343057925, guid: 0954a045cedb51c488c8652757e4b8c0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 99e65c16ee998dc49a5d9898757c2bd7, type: 2}
     - target: {fileID: 6335842863927279969, guid: 0954a045cedb51c488c8652757e4b8c0, type: 3}
       propertyPath: _plugColor
       value: 0

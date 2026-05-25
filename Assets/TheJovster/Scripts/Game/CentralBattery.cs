@@ -113,21 +113,25 @@ public class BatterySlot
     public void Fill()
     {
         _isFilled = true;
+/*        if (_slotRenderer == null) return;
 
-        if (_slotRenderer != null)
-        {
-            Color c = PlugColorHelper.ToColor(_color);
-            c.a = 1f;
-            _slotRenderer.material.color = c;
-            _slotRenderer.material.SetColor("_EmissionColor", c * 2f);
-        }
+        MaterialPropertyBlock mpb = new MaterialPropertyBlock();
+        _slotRenderer.GetPropertyBlock(mpb);
+        Color c = PlugColorHelper.ToColor(_color);
+        mpb.SetColor("_BaseColor", c);
+        mpb.SetColor("_EmissionColor", c * 2f);
+        _slotRenderer.SetPropertyBlock(mpb);*/
     }
 
     public void ApplyIdleColor()
     {
-        if (_slotRenderer == null) return;
+/*        if (_slotRenderer == null) return;
+
+        MaterialPropertyBlock mpb = new MaterialPropertyBlock();
+        _slotRenderer.GetPropertyBlock(mpb);
         Color c = PlugColorHelper.ToColor(_color);
         c.a = 0.4f;
-        _slotRenderer.material.color = c;
+        mpb.SetColor("_BaseColor", c);
+        _slotRenderer.SetPropertyBlock(mpb);*/
     }
 }
